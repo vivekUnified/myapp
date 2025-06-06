@@ -225,6 +225,9 @@ class ChatPageState extends State<ChatPage> {
 
   /// Each time to start a speech recognition session
   void _startListening() async {
+    if (kDebugMode) {
+      print('Starting speech recognition...');
+    }
     await _speechToText.listen(onResult: _onSpeechResult);
     setState(() {});
   }
@@ -241,6 +244,9 @@ class ChatPageState extends State<ChatPage> {
   /// This is the callback that the SpeechToText plugin calls when
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
+    if (kDebugMode) {
+      print('Result: ${result.recognizedWords}');
+    }
     setState(() {
       _lastWords = result.recognizedWords;
     });
